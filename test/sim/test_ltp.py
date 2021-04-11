@@ -928,9 +928,14 @@ def test_ltp(shell_command, target, test_name, pass_regex):
 
     assert results is not None, "Test killed simulation"
     assert results[0] is not None, "Test returned nothing"
-    if "Does not support SS (SPORADIC SERVER)" in results[0]:
+    if any(
+        re.match(r".*Does not support SS \(SPORADIC SERVER\)", result)
+        for result in results[0]
+    ):
         pytest.skip("unsupported configuration (SPORADIC SERVER)")
-    if "_POSIX_SEMAPHORES is not defined" in results[0]:
+    if any(
+        re.match(r".*_POSIX_SEMAPHORES is not defined", result) for result in results[0]
+    ):
         pytest.skip("unsupported configuration (_POSIX_SEMAPHORES not defined)")
 
     if results[2] == -1:
