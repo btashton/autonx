@@ -1,0 +1,11 @@
+targets:
+  sim-ltp:
+    drivers:
+      SimConsoleDriver:
+        cmd: "/home/bashton/nuttx/wrk/nuttx/nuttx"
+      FakePowerDriver: {}
+      NSHDriver:
+          login_timeout: 5
+      NSHStrategy: {}
+imports:
+  - "labgrid.driver.fake"
